@@ -137,12 +137,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="graphPoint.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="sensor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphPoint.h" />
     <ClInclude Include="MainWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="sensor.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
