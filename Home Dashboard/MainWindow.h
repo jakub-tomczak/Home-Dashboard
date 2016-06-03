@@ -1,6 +1,7 @@
 #pragma once
 #include <time.h>
 #include <windows.h>
+#include <cstdlib>
 
 namespace HomeDashboard {
 
@@ -27,7 +28,12 @@ namespace HomeDashboard {
 			//TODO: Add the constructor code here
 			//
 			Console::WriteLine("inicjalizacja\n");
-		//	DataChart->Series["temperatura"]->Points->AddXY("cos", 25);
+			//HomeDashboard::MainWindow::DataChart->Series->Add("temperatura");
+			// HomeDashboard::MainWindow::DataChart->Series["temperature"]->ChartType = System::Windows::Forms::DataVisualization::Charting->Chart;
+			Point^ a = gcnew Point(1, 2);
+			Console::WriteLine("Added a chart");
+			
+				DataChart->Series["temperatura"]->Points->AddXY(0, rand()%100);
 		}
 
 	protected:
@@ -98,12 +104,12 @@ namespace HomeDashboard {
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainWindow::typeid));
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea3 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea4 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
@@ -273,21 +279,21 @@ namespace HomeDashboard {
 			// 
 			this->DataChart->BackColor = System::Drawing::Color::Transparent;
 			this->DataChart->BorderlineColor = System::Drawing::Color::Gray;
-			chartArea1->Name = L"ChartArea1";
-			this->DataChart->ChartAreas->Add(chartArea1);
-			legend1->Name = L"Legend1";
-			this->DataChart->Legends->Add(legend1);
+			chartArea3->Name = L"ChartArea";
+			this->DataChart->ChartAreas->Add(chartArea3);
+			legend3->Name = L"Legend1";
+			this->DataChart->Legends->Add(legend3);
 			this->DataChart->Location = System::Drawing::Point(7, 125);
 			this->DataChart->Margin = System::Windows::Forms::Padding(4);
 			this->DataChart->Name = L"DataChart";
-			series1->ChartArea = L"ChartArea1";
-			series1->Legend = L"Legend1";
-			series1->Name = L"temperatura";
-			this->DataChart->Series->Add(series1);
+			series3->ChartArea = L"ChartArea";
+			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
+			series3->Legend = L"Legend1";
+			series3->Name = L"temperatura";
+			this->DataChart->Series->Add(series3);
 			this->DataChart->Size = System::Drawing::Size(736, 157);
 			this->DataChart->TabIndex = 1;
 			this->DataChart->Text = L"chart1";
-			this->DataChart->Visible = false;
 			this->DataChart->Click += gcnew System::EventHandler(this, &MainWindow::DataChart_Click_1);
 			// 
 			// tabPage2
@@ -303,16 +309,16 @@ namespace HomeDashboard {
 			// 
 			// chart1
 			// 
-			chartArea2->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea2);
-			legend2->Name = L"Legend1";
-			this->chart1->Legends->Add(legend2);
+			chartArea4->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea4);
+			legend4->Name = L"Legend1";
+			this->chart1->Legends->Add(legend4);
 			this->chart1->Location = System::Drawing::Point(149, 61);
 			this->chart1->Name = L"chart1";
-			series2->ChartArea = L"ChartArea1";
-			series2->Legend = L"Legend1";
-			series2->Name = L"Series1";
-			this->chart1->Series->Add(series2);
+			series4->ChartArea = L"ChartArea1";
+			series4->Legend = L"Legend1";
+			series4->Name = L"Series1";
+			this->chart1->Series->Add(series4);
 			this->chart1->Size = System::Drawing::Size(300, 300);
 			this->chart1->TabIndex = 0;
 			this->chart1->Text = L"chart1";
@@ -523,7 +529,7 @@ namespace HomeDashboard {
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-			this->BackColor = System::Drawing::Color::DarkGray;
+			this->BackColor = System::Drawing::Color::LightGray;
 			this->ClientSize = System::Drawing::Size(884, 561);
 			this->Controls->Add(this->tabControl1);
 			this->Controls->Add(this->groupBox1);
@@ -599,6 +605,16 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 }
 
 
-private: System::Void DataChart_Click_1(System::Object^  sender, System::EventArgs^  e);
+
+private: System::Void DataChart_Click_1(System::Object^  sender, System::EventArgs^  e) {
+
+		for (int i = 0;i < 1000;i++)
+		{
+			DataChart->Series["temperatura"]->Points->AddXY(i, rand() % 100);
+			wait(30);
+			Application::DoEvents();
+		}
+				
+		 }
 };
 }

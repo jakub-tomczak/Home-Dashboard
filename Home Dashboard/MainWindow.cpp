@@ -31,6 +31,8 @@ void HomeDashboard::MainWindow::moveGroupox()
 			//wait(10);
 			HomeDashboard::MainWindow::groupBox1->Update();
 			HomeDashboard::MainWindow::groupBox1->Location = System::Drawing::Point(30, i);
+
+			Application::DoEvents();
 		}
 		// HomeDashboard::MainWindow::button1->Visible = true;
 		stateVisible = false;
@@ -43,6 +45,8 @@ void HomeDashboard::MainWindow::moveGroupox()
 		{
 
 			// System::Threading::Timeout();
+
+			Application::DoEvents();
 			wait(5);Update();
 			HomeDashboard::MainWindow::groupBox1->Update();
 			HomeDashboard::MainWindow::groupBox1->Location = System::Drawing::Point(30, i);
@@ -85,10 +89,3 @@ System::Void groupBox1_OnMouseHover(System::Object ^sender, System::EventArgs ^e
 	Console::WriteLine("lecimy dalej!");
 }
 */
-System::Void HomeDashboard::MainWindow::DataChart_Click_1(System::Object^  sender, System::EventArgs^  e)
-{
-	HomeDashboard::MainWindow::DataChart->Series->Add("temperatura");
-	HomeDashboard::MainWindow::DataChart->Series["temperature"]->ChartType = System::Windows::Forms::DataVisualization::Charting->Chart;
-
-	Home
-}
