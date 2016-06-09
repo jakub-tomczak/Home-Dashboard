@@ -41,25 +41,32 @@ namespace HomeDashboard {
 			}
 			catch (Exception^ e)
 			{
-				Console::WriteLine("Nie uda³o siê po³¹czyæ z baz¹ danych!");
-				Console::WriteLine(e->ToString());
+				////Console::WriteLine("Nie uda³o siê po³¹czyæ z baz¹ danych!");
+				////Console::WriteLine(e->ToString());
 			}
-			Console::Write("Stan polaczenia = ");
-			Console::WriteLine(sql->State);
+			////Console::Write("Stan polaczenia = ");
+			////Console::WriteLine(sql->State);
 			*/
 
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
-			Console::WriteLine("inicjalizacja\n");
+			////Console::WriteLine("inicjalizacja\n");
 			
 			timer1->Interval = 30000;
 			timer1->Start();
 			WeatherUpdate();
-			Console::WriteLine("Added a chart");
 
-			TemperatureChart->Series["temperatura"]->Points->AddXY(0, 0);
+			timer2->Interval = 5000;
+			timer2->Start();
+			////Console::WriteLine("Added a chart");
+
+			//TemperatureChart->Series["temperatura"]->Points->AddXY(0, 0);
+			//HumidityChart->Series["humidity"]->Points->AddXY(0, 0);
+
+			timer3->Interval = 3000;
+			timer3->Start();
 
 		}
 
@@ -207,7 +214,7 @@ private: System::Windows::Forms::Label^  label3;
 private: System::Windows::Forms::TabPage^  tabWeather;
 private: System::Windows::Forms::GroupBox^  Ustawienia_LogBox;
 private: System::Windows::Forms::TextBox^  ustawienia_LogTextBox;
-private: System::Windows::Forms::Button^  button2;
+
 private: System::Windows::Forms::GroupBox^  pogoda_currentWeather;
 private: System::Windows::Forms::PictureBox^  pogoda_picture;
 
@@ -235,7 +242,7 @@ private: System::Windows::Forms::Label^  pogoda_pressureLabel;
 
 private: System::Windows::Forms::Label^  pogoda_temp;
 
-private: System::Windows::Forms::ErrorProvider^  errorProvider1;
+
 private: System::Windows::Forms::Label^  pogoda_windSpeedVal;
 private: System::Windows::Forms::Label^  pogoda_windSpeedLabel;
 private: System::Windows::Forms::ProgressBar^  progressBar1;
@@ -247,6 +254,18 @@ private: System::Windows::Forms::Label^  label2;
 private: System::Windows::Forms::Label^  label1;
 private: System::DirectoryServices::DirectoryEntry^  directoryEntry1;
 private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
+private: System::Windows::Forms::Label^  czujniki_statusVal;
+
+private: System::Windows::Forms::Label^  czujniki_statusLabel;
+private: System::Windows::Forms::Timer^  timer2;
+private: System::Windows::Forms::Button^  button3;
+private: System::Windows::Forms::Button^  button2;
+private: System::Windows::Forms::Timer^  timer3;
+private: System::Windows::Forms::Label^  label12;
+private: System::Windows::Forms::Label^  label11;
+private: System::Windows::Forms::Label^  label10;
+private: System::Windows::Forms::Label^  label9;
+
 
 
 
@@ -312,11 +331,11 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Title^  title1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Title^  title2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			this->notifyIcon1 = (gcnew System::Windows::Forms::NotifyIcon(this->components));
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Ustawienia_DialogSaveFile = (gcnew System::Windows::Forms::SaveFileDialog());
@@ -329,11 +348,14 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Ustawienia_LabelStatusWeb = (gcnew System::Windows::Forms::Label());
 			this->Ustawienia_buttonInternetConnection = (gcnew System::Windows::Forms::Button());
 			this->Ustawienia_GroupSavingData = (gcnew System::Windows::Forms::GroupBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->Ustawienia_LabelSave = (gcnew System::Windows::Forms::Label());
 			this->Ustawienia_SaveFormat = (gcnew System::Windows::Forms::Label());
 			this->pageSensors = (gcnew System::Windows::Forms::TabPage());
+			this->czujniki_statusVal = (gcnew System::Windows::Forms::Label());
+			this->czujniki_statusLabel = (gcnew System::Windows::Forms::Label());
 			this->Czujniki_PanelAkwarium = (gcnew System::Windows::Forms::Panel());
 			this->Czujniki_RadioAkwariumOFF = (gcnew System::Windows::Forms::RadioButton());
 			this->Czujniki_RadioAkwariumON = (gcnew System::Windows::Forms::RadioButton());
@@ -351,11 +373,15 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioLampaOFF = (gcnew System::Windows::Forms::RadioButton());
 			this->Czujnik_labelLampa = (gcnew System::Windows::Forms::Label());
 			this->tabHumidity = (gcnew System::Windows::Forms::TabPage());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->HumidityChart = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->tabTemperature = (gcnew System::Windows::Forms::TabPage());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->menuBox = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->dateTimePicker3 = (gcnew System::Windows::Forms::DateTimePicker());
@@ -385,9 +411,10 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->pogoda_temp = (gcnew System::Windows::Forms::Label());
 			this->pogoda_generalLabel = (gcnew System::Windows::Forms::Label());
 			this->pogoda_picture = (gcnew System::Windows::Forms::PictureBox());
-			this->errorProvider1 = (gcnew System::Windows::Forms::ErrorProvider(this->components));
 			this->directoryEntry1 = (gcnew System::DirectoryServices::DirectoryEntry());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->timer2 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->timer3 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->pageSettings->SuspendLayout();
 			this->Ustawienia_LogBox->SuspendLayout();
 			this->Ustawienia_GroupInternetConnection->SuspendLayout();
@@ -407,7 +434,6 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->tabWeather->SuspendLayout();
 			this->pogoda_currentWeather->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pogoda_picture))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// notifyIcon1
@@ -469,17 +495,18 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Ustawienia_GroupInternetConnection->Location = System::Drawing::Point(308, 164);
 			this->Ustawienia_GroupInternetConnection->Name = L"Ustawienia_GroupInternetConnection";
 			this->Ustawienia_GroupInternetConnection->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->Ustawienia_GroupInternetConnection->Size = System::Drawing::Size(341, 100);
+			this->Ustawienia_GroupInternetConnection->Size = System::Drawing::Size(341, 111);
 			this->Ustawienia_GroupInternetConnection->TabIndex = 1;
 			this->Ustawienia_GroupInternetConnection->TabStop = false;
 			this->Ustawienia_GroupInternetConnection->Text = L"Po³¹czenie internetowe";
 			// 
 			// Ustawienia_labelStatus
 			// 
-			this->Ustawienia_labelStatus->AutoSize = true;
+			this->Ustawienia_labelStatus->Font = (gcnew System::Drawing::Font(L"Apolonia", 8.999999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->Ustawienia_labelStatus->Location = System::Drawing::Point(111, 71);
 			this->Ustawienia_labelStatus->Name = L"Ustawienia_labelStatus";
-			this->Ustawienia_labelStatus->Size = System::Drawing::Size(17, 16);
+			this->Ustawienia_labelStatus->Size = System::Drawing::Size(190, 37);
 			this->Ustawienia_labelStatus->TabIndex = 2;
 			this->Ustawienia_labelStatus->Text = L"...";
 			// 
@@ -504,17 +531,28 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// 
 			// Ustawienia_GroupSavingData
 			// 
+			this->Ustawienia_GroupSavingData->Controls->Add(this->button2);
 			this->Ustawienia_GroupSavingData->Controls->Add(this->comboBox1);
 			this->Ustawienia_GroupSavingData->Controls->Add(this->button1);
 			this->Ustawienia_GroupSavingData->Controls->Add(this->Ustawienia_LabelSave);
 			this->Ustawienia_GroupSavingData->Controls->Add(this->Ustawienia_SaveFormat);
-			this->Ustawienia_GroupSavingData->Location = System::Drawing::Point(308, 57);
+			this->Ustawienia_GroupSavingData->Location = System::Drawing::Point(308, 32);
 			this->Ustawienia_GroupSavingData->Name = L"Ustawienia_GroupSavingData";
 			this->Ustawienia_GroupSavingData->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			this->Ustawienia_GroupSavingData->Size = System::Drawing::Size(341, 101);
+			this->Ustawienia_GroupSavingData->Size = System::Drawing::Size(341, 126);
 			this->Ustawienia_GroupSavingData->TabIndex = 0;
 			this->Ustawienia_GroupSavingData->TabStop = false;
 			this->Ustawienia_GroupSavingData->Text = L"Zapis";
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(126, 96);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 4;
+			this->button2->Text = L"Zapisz!";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MainWindow::button2_Click_1);
 			// 
 			// comboBox1
 			// 
@@ -556,17 +594,40 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// 
 			// pageSensors
 			// 
+			this->pageSensors->Controls->Add(this->czujniki_statusVal);
+			this->pageSensors->Controls->Add(this->czujniki_statusLabel);
 			this->pageSensors->Controls->Add(this->Czujniki_PanelAkwarium);
 			this->pageSensors->Controls->Add(this->Czujniki_PanelRolety);
 			this->pageSensors->Controls->Add(this->Czujniki_PanelKontakt);
 			this->pageSensors->Controls->Add(this->Czujniki_PanelLampa);
-			this->pageSensors->Location = System::Drawing::Point(4, 59);
+			this->pageSensors->Location = System::Drawing::Point(4, 56);
 			this->pageSensors->Name = L"pageSensors";
 			this->pageSensors->Padding = System::Windows::Forms::Padding(3);
-			this->pageSensors->Size = System::Drawing::Size(992, 437);
+			this->pageSensors->Size = System::Drawing::Size(992, 440);
 			this->pageSensors->TabIndex = 2;
 			this->pageSensors->Text = L"Czujniki";
 			this->pageSensors->UseVisualStyleBackColor = true;
+			this->pageSensors->Click += gcnew System::EventHandler(this, &MainWindow::pageSensors_Click);
+			// 
+			// czujniki_statusVal
+			// 
+			this->czujniki_statusVal->AutoSize = true;
+			this->czujniki_statusVal->Location = System::Drawing::Point(464, 284);
+			this->czujniki_statusVal->Name = L"czujniki_statusVal";
+			this->czujniki_statusVal->Size = System::Drawing::Size(27, 16);
+			this->czujniki_statusVal->TabIndex = 17;
+			this->czujniki_statusVal->Text = L"OK";
+			this->czujniki_statusVal->Visible = false;
+			// 
+			// czujniki_statusLabel
+			// 
+			this->czujniki_statusLabel->AutoSize = true;
+			this->czujniki_statusLabel->Location = System::Drawing::Point(394, 284);
+			this->czujniki_statusLabel->Name = L"czujniki_statusLabel";
+			this->czujniki_statusLabel->Size = System::Drawing::Size(53, 16);
+			this->czujniki_statusLabel->TabIndex = 16;
+			this->czujniki_statusLabel->Text = L"ERROR";
+			this->czujniki_statusLabel->Visible = false;
 			// 
 			// Czujniki_PanelAkwarium
 			// 
@@ -585,13 +646,14 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioAkwariumOFF->Name = L"Czujniki_RadioAkwariumOFF";
 			this->Czujniki_RadioAkwariumOFF->Size = System::Drawing::Size(50, 20);
 			this->Czujniki_RadioAkwariumOFF->TabIndex = 11;
-			this->Czujniki_RadioAkwariumOFF->TabStop = true;
 			this->Czujniki_RadioAkwariumOFF->Text = L"OFF";
 			this->Czujniki_RadioAkwariumOFF->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioAkwariumOFF->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioAkwariumOFF_CheckedChanged);
 			// 
 			// Czujniki_RadioAkwariumON
 			// 
 			this->Czujniki_RadioAkwariumON->AutoSize = true;
+			this->Czujniki_RadioAkwariumON->Checked = true;
 			this->Czujniki_RadioAkwariumON->Location = System::Drawing::Point(148, 12);
 			this->Czujniki_RadioAkwariumON->Name = L"Czujniki_RadioAkwariumON";
 			this->Czujniki_RadioAkwariumON->Size = System::Drawing::Size(46, 20);
@@ -599,6 +661,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioAkwariumON->TabStop = true;
 			this->Czujniki_RadioAkwariumON->Text = L"ON";
 			this->Czujniki_RadioAkwariumON->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioAkwariumON->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioAkwariumON_CheckedChanged);
 			// 
 			// Czujnik_labelLampaAkwarium
 			// 
@@ -622,6 +685,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// Czujniki_RadioRoletyON
 			// 
 			this->Czujniki_RadioRoletyON->AutoSize = true;
+			this->Czujniki_RadioRoletyON->Checked = true;
 			this->Czujniki_RadioRoletyON->Location = System::Drawing::Point(148, 11);
 			this->Czujniki_RadioRoletyON->Name = L"Czujniki_RadioRoletyON";
 			this->Czujniki_RadioRoletyON->Size = System::Drawing::Size(46, 20);
@@ -629,6 +693,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioRoletyON->TabStop = true;
 			this->Czujniki_RadioRoletyON->Text = L"ON";
 			this->Czujniki_RadioRoletyON->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioRoletyON->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioRoletyON_CheckedChanged);
 			// 
 			// Czujniki_RadioRoletyOFF
 			// 
@@ -637,9 +702,9 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioRoletyOFF->Name = L"Czujniki_RadioRoletyOFF";
 			this->Czujniki_RadioRoletyOFF->Size = System::Drawing::Size(50, 20);
 			this->Czujniki_RadioRoletyOFF->TabIndex = 7;
-			this->Czujniki_RadioRoletyOFF->TabStop = true;
 			this->Czujniki_RadioRoletyOFF->Text = L"OFF";
 			this->Czujniki_RadioRoletyOFF->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioRoletyOFF->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioRoletyOFF_CheckedChanged);
 			// 
 			// Czujnik_labelRolety
 			// 
@@ -665,6 +730,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// Czujniki_RadioKontaktON
 			// 
 			this->Czujniki_RadioKontaktON->AutoSize = true;
+			this->Czujniki_RadioKontaktON->Checked = true;
 			this->Czujniki_RadioKontaktON->Location = System::Drawing::Point(148, 12);
 			this->Czujniki_RadioKontaktON->Name = L"Czujniki_RadioKontaktON";
 			this->Czujniki_RadioKontaktON->Size = System::Drawing::Size(46, 20);
@@ -672,6 +738,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioKontaktON->TabStop = true;
 			this->Czujniki_RadioKontaktON->Text = L"ON";
 			this->Czujniki_RadioKontaktON->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioKontaktON->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioKontaktON_CheckedChanged);
 			// 
 			// Czujniki_RadioKontaktOFF
 			// 
@@ -680,9 +747,9 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioKontaktOFF->Name = L"Czujniki_RadioKontaktOFF";
 			this->Czujniki_RadioKontaktOFF->Size = System::Drawing::Size(50, 20);
 			this->Czujniki_RadioKontaktOFF->TabIndex = 9;
-			this->Czujniki_RadioKontaktOFF->TabStop = true;
 			this->Czujniki_RadioKontaktOFF->Text = L"OFF";
 			this->Czujniki_RadioKontaktOFF->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioKontaktOFF->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioKontaktOFF_CheckedChanged);
 			// 
 			// Czujnik_labelKontakt
 			// 
@@ -707,6 +774,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// Czujniki_RadioLampaON
 			// 
 			this->Czujniki_RadioLampaON->AutoSize = true;
+			this->Czujniki_RadioLampaON->Checked = true;
 			this->Czujniki_RadioLampaON->Location = System::Drawing::Point(148, 11);
 			this->Czujniki_RadioLampaON->Name = L"Czujniki_RadioLampaON";
 			this->Czujniki_RadioLampaON->Size = System::Drawing::Size(46, 20);
@@ -714,6 +782,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioLampaON->TabStop = true;
 			this->Czujniki_RadioLampaON->Text = L"ON";
 			this->Czujniki_RadioLampaON->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioLampaON->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioLampaON_CheckedChanged);
 			// 
 			// Czujniki_RadioLampaOFF
 			// 
@@ -722,9 +791,9 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_RadioLampaOFF->Name = L"Czujniki_RadioLampaOFF";
 			this->Czujniki_RadioLampaOFF->Size = System::Drawing::Size(50, 20);
 			this->Czujniki_RadioLampaOFF->TabIndex = 5;
-			this->Czujniki_RadioLampaOFF->TabStop = true;
 			this->Czujniki_RadioLampaOFF->Text = L"OFF";
 			this->Czujniki_RadioLampaOFF->UseVisualStyleBackColor = true;
+			this->Czujniki_RadioLampaOFF->CheckedChanged += gcnew System::EventHandler(this, &MainWindow::Czujniki_RadioLampaOFF_CheckedChanged);
 			// 
 			// Czujnik_labelLampa
 			// 
@@ -737,6 +806,9 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// 
 			// tabHumidity
 			// 
+			this->tabHumidity->BackColor = System::Drawing::Color::LightGray;
+			this->tabHumidity->Controls->Add(this->label12);
+			this->tabHumidity->Controls->Add(this->label11);
 			this->tabHumidity->Controls->Add(this->HumidityChart);
 			this->tabHumidity->Location = System::Drawing::Point(4, 56);
 			this->tabHumidity->Name = L"tabHumidity";
@@ -744,31 +816,56 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->tabHumidity->Size = System::Drawing::Size(992, 440);
 			this->tabHumidity->TabIndex = 1;
 			this->tabHumidity->Text = L"Wilgotnoœæ";
-			this->tabHumidity->UseVisualStyleBackColor = true;
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Location = System::Drawing::Point(774, 341);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(50, 16);
+			this->label12->TabIndex = 2;
+			this->label12->Text = L"Czas [s]";
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(48, 44);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(96, 16);
+			this->label11->TabIndex = 1;
+			this->label11->Text = L"Wilgotnoœæ [%]";
 			// 
 			// HumidityChart
 			// 
+			this->HumidityChart->BackColor = System::Drawing::Color::Gainsboro;
 			chartArea1->Name = L"ChartArea1";
 			this->HumidityChart->ChartAreas->Add(chartArea1);
-			legend1->Name = L"Legend1";
-			this->HumidityChart->Legends->Add(legend1);
-			this->HumidityChart->Location = System::Drawing::Point(40, 30);
+			this->HumidityChart->Location = System::Drawing::Point(33, 17);
 			this->HumidityChart->Margin = System::Windows::Forms::Padding(4);
 			this->HumidityChart->Name = L"HumidityChart";
+			series1->BorderColor = System::Drawing::Color::Gray;
 			series1->ChartArea = L"ChartArea1";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
-			series1->Legend = L"Legend1";
-			series1->Name = L"Series1";
+			series1->IsValueShownAsLabel = true;
+			series1->MarkerColor = System::Drawing::Color::Gray;
+			series1->Name = L"humidity";
 			this->HumidityChart->Series->Add(series1);
-			this->HumidityChart->Size = System::Drawing::Size(930, 340);
+			this->HumidityChart->Size = System::Drawing::Size(825, 340);
 			this->HumidityChart->TabIndex = 0;
 			this->HumidityChart->Text = L"HumidityChart";
+			title1->Alignment = System::Drawing::ContentAlignment::TopCenter;
+			title1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			title1->Name = L"Title1";
+			title1->Text = L"Wilgotnoœæ w pokoju %";
+			this->HumidityChart->Titles->Add(title1);
 			this->HumidityChart->Click += gcnew System::EventHandler(this, &MainWindow::HumidityChart_Click);
 			// 
 			// tabTemperature
 			// 
-			this->tabTemperature->BackColor = System::Drawing::Color::Transparent;
-			this->tabTemperature->Controls->Add(this->button2);
+			this->tabTemperature->BackColor = System::Drawing::Color::LightGray;
+			this->tabTemperature->Controls->Add(this->label10);
+			this->tabTemperature->Controls->Add(this->label9);
 			this->tabTemperature->Controls->Add(this->menuBox);
 			this->tabTemperature->Controls->Add(this->TemperatureChart);
 			this->tabTemperature->Location = System::Drawing::Point(4, 59);
@@ -779,40 +876,58 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->tabTemperature->Text = L"Temperatura";
 			this->tabTemperature->Click += gcnew System::EventHandler(this, &MainWindow::tabTemperature_Click);
 			// 
-			// button2
+			// label10
 			// 
-			this->button2->Location = System::Drawing::Point(595, 7);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 6;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = true;
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(65, 49);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(105, 16);
+			this->label10->TabIndex = 7;
+			this->label10->Text = L"Temperatura [C]";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(746, 350);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(54, 16);
+			this->label9->TabIndex = 6;
+			this->label9->Text = L"Czas  [s]";
 			// 
 			// menuBox
 			// 
 			this->menuBox->BackColor = System::Drawing::Color::LightGray;
 			this->menuBox->Controls->Add(this->groupBox1);
-			this->menuBox->Location = System::Drawing::Point(231, 71);
+			this->menuBox->Location = System::Drawing::Point(344, 391);
 			this->menuBox->Name = L"menuBox";
 			this->menuBox->Size = System::Drawing::Size(243, 223);
 			this->menuBox->TabIndex = 5;
 			this->menuBox->TabStop = false;
 			this->menuBox->Text = L"Dodatkowe opcje";
-			this->menuBox->Enter += gcnew System::EventHandler(this, &MainWindow::groupBox1_Enter);
-			this->menuBox->MouseHover += gcnew System::EventHandler(this, &MainWindow::groupBox1_OnMouseHover);
+			this->menuBox->Click += gcnew System::EventHandler(this, &MainWindow::mainBox_Clicked);
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->button3);
 			this->groupBox1->Controls->Add(this->dateTimePicker1);
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Controls->Add(this->dateTimePicker3);
 			this->groupBox1->Controls->Add(this->label3);
 			this->groupBox1->Location = System::Drawing::Point(17, 31);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(211, 127);
+			this->groupBox1->Size = System::Drawing::Size(211, 148);
 			this->groupBox1->TabIndex = 10;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Zakres dat";
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(68, 110);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 11;
+			this->button3->Text = L"Ustaw";
+			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// dateTimePicker1
 			// 
@@ -848,23 +963,25 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// 
 			// TemperatureChart
 			// 
-			this->TemperatureChart->BackColor = System::Drawing::Color::Transparent;
+			this->TemperatureChart->BackColor = System::Drawing::Color::Gainsboro;
 			this->TemperatureChart->BorderlineColor = System::Drawing::Color::Gray;
 			chartArea2->Name = L"ChartArea";
 			this->TemperatureChart->ChartAreas->Add(chartArea2);
-			legend2->Name = L"Legend1";
-			this->TemperatureChart->Legends->Add(legend2);
-			this->TemperatureChart->Location = System::Drawing::Point(40, 30);
+			this->TemperatureChart->Location = System::Drawing::Point(65, 26);
 			this->TemperatureChart->Margin = System::Windows::Forms::Padding(4);
 			this->TemperatureChart->Name = L"TemperatureChart";
 			series2->ChartArea = L"ChartArea";
 			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
-			series2->Legend = L"Legend1";
 			series2->Name = L"temperatura";
 			this->TemperatureChart->Series->Add(series2);
-			this->TemperatureChart->Size = System::Drawing::Size(930, 340);
+			this->TemperatureChart->Size = System::Drawing::Size(765, 340);
 			this->TemperatureChart->TabIndex = 1;
 			this->TemperatureChart->Text = L"chart1";
+			title2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			title2->Name = L"Title1";
+			title2->Text = L"Temperatura w pokoju °C";
+			this->TemperatureChart->Titles->Add(title2);
 			this->TemperatureChart->Click += gcnew System::EventHandler(this, &MainWindow::DataChart_Click_1);
 			// 
 			// tabData
@@ -886,10 +1003,10 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// tabWeather
 			// 
 			this->tabWeather->Controls->Add(this->pogoda_currentWeather);
-			this->tabWeather->Location = System::Drawing::Point(4, 56);
+			this->tabWeather->Location = System::Drawing::Point(4, 59);
 			this->tabWeather->Name = L"tabWeather";
 			this->tabWeather->Padding = System::Windows::Forms::Padding(3);
-			this->tabWeather->Size = System::Drawing::Size(992, 440);
+			this->tabWeather->Size = System::Drawing::Size(992, 437);
 			this->tabWeather->TabIndex = 4;
 			this->tabWeather->Text = L"Pogoda";
 			this->tabWeather->UseVisualStyleBackColor = true;
@@ -955,7 +1072,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(419, 152);
+			this->label5->Location = System::Drawing::Point(428, 152);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(20, 16);
 			this->label5->TabIndex = 17;
@@ -964,7 +1081,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(419, 119);
+			this->label2->Location = System::Drawing::Point(428, 119);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(20, 16);
 			this->label2->TabIndex = 16;
@@ -1118,12 +1235,13 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->pogoda_picture->TabIndex = 0;
 			this->pogoda_picture->TabStop = false;
 			// 
-			// errorProvider1
+			// timer2
 			// 
-			this->errorProvider1->ContainerControl = this;
+			this->timer2->Tick += gcnew System::EventHandler(this, &MainWindow::timer2_Tick);
 			// 
-			// folderBrowserDialog1
+			// timer3
 			// 
+			this->timer3->Tick += gcnew System::EventHandler(this, &MainWindow::timer3_Tick);
 			// 
 			// MainWindow
 			// 
@@ -1151,6 +1269,7 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Ustawienia_GroupSavingData->ResumeLayout(false);
 			this->Ustawienia_GroupSavingData->PerformLayout();
 			this->pageSensors->ResumeLayout(false);
+			this->pageSensors->PerformLayout();
 			this->Czujniki_PanelAkwarium->ResumeLayout(false);
 			this->Czujniki_PanelAkwarium->PerformLayout();
 			this->Czujniki_PanelRolety->ResumeLayout(false);
@@ -1160,8 +1279,10 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->Czujniki_PanelLampa->ResumeLayout(false);
 			this->Czujniki_PanelLampa->PerformLayout();
 			this->tabHumidity->ResumeLayout(false);
+			this->tabHumidity->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->HumidityChart))->EndInit();
 			this->tabTemperature->ResumeLayout(false);
+			this->tabTemperature->PerformLayout();
 			this->menuBox->ResumeLayout(false);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
@@ -1171,7 +1292,6 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 			this->pogoda_currentWeather->ResumeLayout(false);
 			this->pogoda_currentWeather->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pogoda_picture))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->errorProvider1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -1187,17 +1307,54 @@ private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 
 
 		//my methods
+		
+			private: System::Void mainBox_Clicked(System::Object^  sender, System::EventArgs^  e)
+			{
+				if (stateVisible)
+				{
+					stateVisible = false;
+					int endPoint = menuBox->Location.Y-300;
+					int startPoint = HomeDashboard::MainWindow::menuBox->Location.Y;
+					int X = menuBox->Location.X;
+					for (int i = startPoint;i > endPoint;i -= 2)
+					{
+						Application::DoEvents();
+						HomeDashboard::MainWindow::menuBox->Update();
+						HomeDashboard::MainWindow::menuBox->Location = System::Drawing::Point(X, i);
+						//menuBox->BackColor = Color::FromArgb(j, 211,211,211);
+						wait(10);
+					}
+				}
+				else
+				{
+					stateVisible = true;
+					int endPoint = menuBox->Location.Y+300;
+					int startPoint = HomeDashboard::MainWindow::menuBox->Location.Y;
+					int X = menuBox->Location.X;
+					
+					for (int i = startPoint;i < endPoint;i += 2)
+					{
+						Application::DoEvents();
+						HomeDashboard::MainWindow::menuBox->Update();
+						HomeDashboard::MainWindow::menuBox->Location = System::Drawing::Point(X, i);
+						//menuBox->BackColor = Color::FromArgb(j, 211, 211, 211);
+						wait(10);
+						
+					}
+				}
+			}
 		void HomeDashboard::MainWindow::moveGroupox()
 		{
-			Point endPointA = System::Drawing::Point(0, HomeDashboard::MainWindow::Height);
+			Point endPointA = System::Drawing::Point(0, HomeDashboard::MainWindow::Height-200);
+
 			Point startPointA = System::Drawing::Point(0, HomeDashboard::MainWindow::Height);
-			int endPoint = HomeDashboard::MainWindow::menuBox->Height;
+			int endPoint = HomeDashboard::MainWindow::menuBox->Height-200;
 			int endPoint2 = HomeDashboard::MainWindow::Height;
-			Console::WriteLine(endPoint2);
+			////Console::WriteLine(endPoint2);
 
 			if (stateVisible)
 			{
-				endPoint /= 2;
+				
 				for (int i = 41; i <= endPointA.Y + 41;i += 2)
 				{
 					Sleep(10);
@@ -1245,8 +1402,8 @@ private: System::Void DataChart_Click(System::Object^  sender, System::EventArgs
 	}
 
 private: System::Void groupBox1_Enter(System::Object^  sender, System::EventArgs^  e) {
-	Console::WriteLine("Wszed³eœ na teren grupy!\r\n");
-	
+	//Console::WriteLine("Wszed³eœ na teren grupy!\r\n");
+	moveGroupox();
 }
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1260,24 +1417,24 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void groupBox1_OnMouseHover(System::Object ^sender, System::EventArgs ^e)
 
 	{
-		Console::WriteLine("group hover!");
+		////Console::WriteLine("group hover!");
 
 
 		//	 Thread^ newThread = gcnew Thread(gcnew ThreadStart(&MainWindow::moveGroupox()));
 		// newThread->Start();
 		//	moveGroupox();
-		Console::WriteLine("lecimy dalej!");
+		////Console::WriteLine("lecimy dalej!");
 	}
 	/*
 	System::Void groupBox1_OnMouseHover(System::Object ^sender, System::EventArgs ^e)
 	{
-	Console::WriteLine("group hover!");
+	////Console::WriteLine("group hover!");
 
 
 	//	 Thread^ newThread = gcnew Thread(gcnew ThreadStart(&MainWindow::moveGroupox()));
 	// newThread->Start();
 	//HomeDashboard::MainWindow::moveGroupox();
-	Console::WriteLine("lecimy dalej!");
+	////Console::WriteLine("lecimy dalej!");
 	}
 	*/
 
@@ -1319,7 +1476,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 */
 
 private: System::Void tabPage4_Click(System::Object^  sender, System::EventArgs^  e) {
-	Console::WriteLine("Started obtaining data!");
+	////Console::WriteLine("Started obtaining data!");
 	wait(200);
 
 	/*
@@ -1333,7 +1490,7 @@ private: System::Void tabPage4_Click(System::Object^  sender, System::EventArgs^
 
 
 	String ^htmlCode = tempClient->DownloadString("http://kubat.beskjaba.com/PHP_temp/");
-	Console::WriteLine(htmlCode);
+	////Console::WriteLine(htmlCode);
 	} catch (WebException^ WebEx)
 	{
 		errorReport(WebEx);
@@ -1341,7 +1498,7 @@ private: System::Void tabPage4_Click(System::Object^  sender, System::EventArgs^
 	/*
 	System::Uri^ url = gcnew Uri("http://www.kubat.besaba.com");
 	tempClient->DownloadStringAsync(url);
-	Console::WriteLine(url->ToString());
+	////Console::WriteLine(url->ToString());
 	*/
 	}
 
@@ -1356,7 +1513,7 @@ private: System::Void tabPage4_Click(System::Object^  sender, System::EventArgs^
 
    array<Byte>^ pageData = client->DownloadData( "http://www.contoso.com" );
    String^ pageHtml = Encoding::ASCII->GetString( pageData );
-   Console::WriteLine( pageHtml );
+   ////Console::WriteLine( pageHtml );
 
    // Download the data to a file.
    client->DownloadFile( "http://www.contoso.com", "page.htm" );
@@ -1368,10 +1525,10 @@ private: System::Void tabPage4_Click(System::Object^  sender, System::EventArgs^
 }
 catch ( WebException^ webEx ) 
 {
-   Console::WriteLine( webEx->ToString() );
+   ////Console::WriteLine( webEx->ToString() );
    if ( webEx->Status == WebExceptionStatus::ConnectFailure )
    {
-      Console::WriteLine( "Are you behind a firewall?  If so, go through the proxy server." );
+      ////Console::WriteLine( "Are you behind a firewall?  If so, go through the proxy server." );
    }
 }
 			 */
@@ -1407,7 +1564,7 @@ private: System::Void InternetConnectionChecker()
 			 catch (WebException^ WebEx)
 			 {
 				 
-				 Console::WriteLine(WebEx->ToString());
+				 ////Console::WriteLine(WebEx->ToString());
 				 Ustawienia_labelStatus->BackColor = System::Drawing::Color::DarkRed;
 				 Ustawienia_labelStatus->ForeColor = System::Drawing::Color::WhiteSmoke;
 				 Ustawienia_labelStatus->Text = L"There was an error in obtaining the data!";
@@ -1439,7 +1596,7 @@ private: System::Void HumidityChart_Click(System::Object^  sender, System::Event
 		catch (WebException^ WebEx)
 		{
 
-			Console::WriteLine(WebEx->ToString());
+			////Console::WriteLine(WebEx->ToString());
 		}
 	}
 
@@ -1450,7 +1607,7 @@ private: System::Void Czujnik_labelRolety_Click(System::Object^  sender, System:
 }
 private: System::Void tabTemperature_Click(System::Object^ sender, System::EventArgs^ e)
 		 {
-			 Console::WriteLine("Tab temperatura has been clicked!");
+			 ////Console::WriteLine("Tab temperatura has been clicked!");
 		 }
 private: System::Void notifyIcon1_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 }
@@ -1477,8 +1634,8 @@ private: System::Void InitializeWeather()
 	}
 	catch (WebException^ WebEx)
 	{
-		Console::WriteLine("There was an error in obtaining data!");
-		Console::WriteLine(WebEx->ToString());
+		////Console::WriteLine("There was an error in obtaining data!");
+		////Console::WriteLine(WebEx->ToString());
 		// HomeDashboard::MainWindow::notifyIcon1->BalloonTipShown()
 	}
 }
@@ -1571,8 +1728,9 @@ private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs
 	//HomeDashboard::MainWindow::Ustawienia_DialogSaveFile->ShowDialog();
 	//filenameChoosen = true;
 	folderBrowserDialog1->ShowDialog();
-
+	filenameChoosen = true;
 	filesystemChoosen = folderBrowserDialog1->SelectedPath;
+
 	MessageBox::Show("Zmieniono plik zapisu na: "+filesystemChoosen,
 	"Zmieniono pliku zapisu", MessageBoxButtons::OK,
 	MessageBoxIcon::Information);
@@ -1583,6 +1741,7 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, Sy
 }
 private: System::Void saveToFile(String^ type)
 {
+
 					 System::String^ fullFilename = "";
 					 if (filenameChanged)
 					 {
@@ -1597,7 +1756,20 @@ private: System::Void saveToFile(String^ type)
 					 //name of a file
 					 //DateTime^ time =  DateTime::Now;
 
-					 filename = "HomeDash_" + DateTime::Now.ToString() + filename;
+					 filename = "\\HomeDash_" + DateTime::Now.ToString() + filename;
+
+					 //jezlei nie wybralismy sciezki do pliku
+					 if (filenameChoosen)
+					 {
+						 filename = filesystemChoosen + filename;
+						 //Console::WriteLine(filename);
+					 }
+					 else
+					 {
+						 filename = "C:" + filename;
+						 //Console::WriteLine("nie zmieniony");
+						 //Console::WriteLine(filename);
+					 }
 
 					 //saving a file-> filesystemChoosen+filename
 					 //check if a file exist
@@ -1608,6 +1780,7 @@ private: System::Void saveToFile(String^ type)
 							 File::Delete(filename);
 
 						 }
+						 filename = "cos1.txt";
 						 StreamWriter^ fileSave = nullptr;
 						 try
 						 {
@@ -1635,6 +1808,11 @@ private: System::Void saveToFile(String^ type)
 
 
 }
+		 private: System::Void closeApp(int timeout)
+		 {
+			 Application::DoEvents();
+			 wait(timeout*1000);
+		 }
 
 private: System::Void errorReport(System::String ^err)
 {
@@ -1647,7 +1825,9 @@ private: System::Void errorReport(System::String ^err)
 			 DateTime^ ErrTime = DateTime::Now;
 			 HomeDashboard::MainWindow::ustawienia_LogTextBox->Text += ErrTime->ToString() + ":Problem ze œci¹gniêciem danych :" + Environment::NewLine;
 			 HomeDashboard::MainWindow::ustawienia_LogTextBox->Text += WebEx->ToString() + Environment::NewLine;
-
+			 MessageBox::Show("Brak po³¹czenia z internetem, aplikacja zostanie zamkniêta w ci¹gu 10 sekund!", "Brak po³¹czenia internetowego!", MessageBoxButtons::OK,
+				 MessageBoxIcon::Information);
+			 closeApp(10);
 		 }
 						 private: System::Void errorReport(IOException^ IOEx)
 						 {
@@ -1661,7 +1841,7 @@ private: System::Void errorReport(System::String ^err)
 											 DateTime^ ErrTime = DateTime::Now;
 											 HomeDashboard::MainWindow::ustawienia_LogTextBox->Text += ErrTime->ToString() + ":Problem z systemowy:" + Environment::NewLine;
 											 HomeDashboard::MainWindow::ustawienia_LogTextBox->Text += Ex->ToString() + Environment::NewLine;
-
+											 
 										 }
 private: System::Void dumpData(String^ toFile)
 {
@@ -1674,38 +1854,241 @@ private: System::Void dumpData(String^ toFile)
 
 }	
 
-private: System::Void handleSensors()
-{
-	array<sensor^>^ sensors = nullptr;
-	
 
+		 sensor^ sensorPom = gcnew sensor;
+private: System::Void Czujniki_RadioLampaON_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "lampka";
+	sensorPom->state = 1;
+	SensorSetStatus();
 
-
-
-	try {
-		WebClient^ weather = gcnew WebClient();
-		System::String^ status = weather->DownloadString("http://www.kubat.besaba.com/PHP_temp/sensorsState.php");
-		DateTime^ ErrTime = DateTime::Now;
-		
-		///
-
-		try {
-		}
-		catch (Exception ^e)
-		{
-			errorReport(e);
-		}
-		HomeDashboard::MainWindow::ustawienia_LogTextBox->Text += ErrTime->Hour.ToString() + ":" + ErrTime->Minute.ToString() + ":Weather updated!\n\r" + Environment::NewLine;
-	}
-	catch (WebException^ WebEx)
-	{
-		errorReport(WebEx);
-	}
-
-
-
-	
+}
+private: System::Void Czujniki_RadioLampaOFF_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "lampka";
+	sensorPom->state = 0;
+	SensorSetStatus();
 }
 
+
+		 private: System::Void SensorSetStatus() 
+		 {
+			 try {
+				 ////Console::WriteLine("zmieniam stan!");
+				 Application::DoEvents();
+				 WebClient^ setStatus = gcnew WebClient();
+				 String^ state = "0";
+				 if (sensorPom->state == 1) state = "1";
+				 System::String ^ pom = "http://www.kubat.besaba.com/PHP_temp/saveStatus.php?q=HomeDashboard&sensor=" + sensorPom->name + "&state=" + state;
+				 System::String^ status = setStatus->DownloadString(pom);
+				 
+				 ////Console::WriteLine(status);
+				 
+				 if (status->IndexOf("ok")>1)
+				 {
+					 
+					 czujniki_statusVal->Visible = true;
+					 for (int j = 0; j < 255; j += 5)
+					 {
+						 czujniki_statusLabel->BackColor = Color::FromArgb(j, 26, 148, 49);
+						 czujniki_statusVal->BackColor = Color::FromArgb(j, 26, 148, 49);
+						 wait(10);
+						 Application::DoEvents();
+					 }
+					 for (int j = 255; j >=0; j -= 5)
+					 {
+						 czujniki_statusLabel->BackColor = Color::FromArgb(j, 26, 148, 49);
+						 czujniki_statusVal->BackColor = Color::FromArgb(j, 26, 148, 49);
+						 wait(10);
+						 Application::DoEvents();
+					 }
+					 czujniki_statusVal->Visible = false;
+				 }
+				 else
+				 {czujniki_statusLabel->Visible = true;
+					 for (int j = 0; j < 255; j += 5)
+					 {
+						 czujniki_statusLabel->BackColor = Color::FromArgb(j, 255, 28, 28);
+						 czujniki_statusVal->BackColor = Color::FromArgb(j, 255, 28, 28);
+						 wait(10);
+						 Application::DoEvents();
+					 }
+					 for (int j = 255; j >= 0; j -= 5)
+					 {
+						 czujniki_statusLabel->BackColor = Color::FromArgb(j, 255, 28, 28);
+						 czujniki_statusVal->BackColor = Color::FromArgb(j, 255, 28, 28);
+						 wait(10);
+						 Application::DoEvents();
+					 }
+				 }czujniki_statusLabel->Visible = false;
+				 
+				 
+			 }
+			 catch (WebException^ WebEx)
+			 {
+				 errorReport(WebEx);
+			 }
+		 
+		 }
+
+				  private: System::Void handleSensors()
+				  {
+					  sensor^ a = gcnew sensor;
+					  sensor^ b = gcnew sensor;
+					  sensor^ c = gcnew sensor;
+					  sensor^ d = gcnew sensor;
+					  try {
+						  WebClient^ weather = gcnew WebClient();
+						  System::String^ status = weather->DownloadString("http://www.kubat.besaba.com/PHP_temp/sensorsState.php");
+						  array<String^> ^states = status->Split(':');
+						  int j = 0;
+						  a->name = states[0];
+						  a->state = int::Parse(states[1]); 
+						  if (a->state == 1)
+						  { Czujniki_RadioLampaON->Checked = true;
+						  Czujniki_RadioLampaOFF->Checked = false;
+						  }
+							  
+						  else
+						  {
+							  Czujniki_RadioLampaON->Checked = false;
+							 Czujniki_RadioLampaOFF->Checked = true;
+						  }
+
+						  b->name = states[2];
+						  b->state = int::Parse(states[3]);
+						  if (b->state == 1)
+						  {
+							  Czujniki_RadioRoletyON->Checked = true;
+							  Czujniki_RadioRoletyOFF->Checked = false;
+						  }
+
+						  else
+						  {
+							  Czujniki_RadioRoletyON->Checked = false;
+							  Czujniki_RadioRoletyOFF->Checked = true;
+						  }
+
+						  c->name = states[4];
+						  c->state = int::Parse(states[5]);
+						  if (c->state == 1)
+						  {
+							  Czujniki_RadioKontaktON->Checked = true;
+							  Czujniki_RadioKontaktOFF->Checked = false;
+						  }
+
+						  else
+						  {
+							  Czujniki_RadioKontaktON->Checked = false;
+							  Czujniki_RadioKontaktOFF->Checked = true;
+						  }
+
+						  d->name = states[6];
+						  d->state = int::Parse(states[7]);
+						  if (d->state == 1)
+						  {
+							  Czujniki_RadioAkwariumON->Checked = true;
+							  Czujniki_RadioAkwariumOFF->Checked = false;
+						  }
+
+						  else
+						  {
+							  Czujniki_RadioAkwariumON->Checked = false;
+							  Czujniki_RadioAkwariumOFF->Checked = true;
+						  }
+
+						  
+
+						  
+						  try {
+						  }
+						  catch (Exception ^e)
+						  {
+							  errorReport(e);
+						  }
+						 // HomeDashboard::MainWindow::ustawienia_LogTextBox->Text += ErrTime->Hour.ToString() + ":" + ErrTime->Minute.ToString() + ":Weather updated!\n\r" + Environment::NewLine;
+					  }
+					  catch (WebException^ WebEx)
+					  {
+						  errorReport(WebEx);
+					  }
+
+
+
+
+
+
+
+
+				  }
+						   
+private: System::Void pageSensors_Click(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void Czujniki_RadioRoletyON_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "rolety";
+	sensorPom->state = 1;
+	SensorSetStatus();
+}
+private: System::Void Czujniki_RadioRoletyOFF_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "rolety";
+	sensorPom->state = 0;
+	SensorSetStatus();
+}
+private: System::Void Czujniki_RadioKontaktON_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "kontakt";
+	sensorPom->state = 1;
+	SensorSetStatus();
+}
+private: System::Void Czujniki_RadioKontaktOFF_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "kontakt";
+	sensorPom->state = 0;
+	SensorSetStatus();
+}
+private: System::Void Czujniki_RadioAkwariumON_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "akwarium";
+	sensorPom->state = 1;
+	SensorSetStatus();
+}
+private: System::Void Czujniki_RadioAkwariumOFF_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	sensorPom->name = "akwarium";
+	sensorPom->state = 0;
+	SensorSetStatus();
+}
+private: System::Void timer2_Tick(System::Object^  sender, System::EventArgs^  e) {
+	handleSensors();
+}
+private: System::Void button2_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	saveToFile(".txt");
+}
+		 private: int graphcount = 1;
+		 private: System::Void drawGraph()
+		 {
+			 try {
+				 Application::DoEvents();
+				 WebClient^ setStatus = gcnew WebClient();
+				 DateTime^ pom = DateTime::Now;
+				// String^ x = pom->Hour.ToString()+":"+;
+				 System::String ^ url = "http://www.kubat.besaba.com/PHP_temp/drawGraph.php";
+				 System::String^ status = setStatus->DownloadString(url);
+				 array<String^> ^states = status->Split(':');
+				 TemperatureChart->Series["temperatura"]->Points->AddXY(graphcount, int::Parse(states[0]));
+				 HumidityChart->Series["humidity"]->Points->AddXY(graphcount, int::Parse(states[1]));
+				 graphcount++;
+
+
+
+
+				 ////Console::WriteLine("temp");
+
+
+
+			 }
+			 catch (WebException^ WebEx)
+			 {
+				 errorReport(WebEx);
+			 }
+
+		 }
+private: System::Void timer3_Tick(System::Object^  sender, System::EventArgs^  e) {
+	drawGraph();
+}
 };
 }
