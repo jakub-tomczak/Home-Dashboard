@@ -1,5 +1,5 @@
 #pragma once
-ref class graphPoint
+ref class graphPoint 
 {
 public:
 	graphPoint();
